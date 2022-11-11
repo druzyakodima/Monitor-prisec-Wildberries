@@ -50,6 +50,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     private CartService cartService;
     private final String ERROR = "Error occurred: ";
+    private String IS_EMPTY_CART = "❌ Пустая корзина";
 
     public TelegramBot() {
     }
@@ -159,8 +160,11 @@ public class TelegramBot extends TelegramLongPollingBot {
     public void removeAllProductInCartUser(long chatId) {
         Set<LineItem> lineItems = cartService.findAllItemsForUser(chatId);
 
-        if (!isEmptyCart(chatId,lineItems)) {
+        if (!cartService.isEmptyCart(chatId)) {
             cartService.removeAllForUser(chatId);
+        } else {
+            SendMessage sendMessage = getSendMessageWithParser(chatId, IS_EMPTY_CART);
+            executeMessage(sendMessage);
         }
     }
 
@@ -183,7 +187,9 @@ public class TelegramBot extends TelegramLongPollingBot {
         List<List<InlineKeyboardButton>> buttons = new ArrayList<>();
         Set<LineItem> products = cartService.findAllItemsForUser(chatId);
 
-        if (isEmptyCart(chatId, products)) {
+        if (cartService.isEmptyCart(chatId)) {
+            SendMessage sendMessage = getSendMessageWithParser(chatId, IS_EMPTY_CART);
+            executeMessage(sendMessage);
             return;
         }
 
@@ -194,7 +200,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                     .callbackData(
                             String.valueOf(
                                     product.getProduct()
-                                    .getProductId()
+                                            .getProductId()
                             )
                     ).build()));
         }
@@ -237,7 +243,11 @@ public class TelegramBot extends TelegramLongPollingBot {
         StringBuilder builder = new StringBuilder();
         Set<LineItem> products = cartService.findAllItemsForUser(chatId);
 
-        if (isEmptyCart(chatId, products)) return;
+        if (cartService.isEmptyCart(chatId)) {
+            SendMessage sendMessage = getSendMessageWithParser(chatId, IS_EMPTY_CART);
+            executeMessage(sendMessage);
+            return;
+        }
 
 
         for (LineItem product : products) {
@@ -255,16 +265,6 @@ public class TelegramBot extends TelegramLongPollingBot {
         SendMessage sendMessage = getSendMessageWithParser(chatId, builder.toString().trim());
         executeMessage(sendMessage);
         log.info("Пользователь " + userService.findByChatId(chatId).getUserName() + " просматривал корзину");
-    }
-
-    private boolean isEmptyCart(long chatId, Set<LineItem> products) {
-
-        if (products.size() == 0) {
-            SendMessage sendMessage = getSendMessageWithParser(chatId, "❌ Пустая корзина");
-            executeMessage(sendMessage);
-            return true;
-        }
-        return false;
     }
 
     public void findProduct(long chatId) {
@@ -293,7 +293,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         Integer productId = parser.getProductId();
 
 
-        if (checkOutOfStock(price, chatId,url,title)) return true;
+        if (checkOutOfStock(price, chatId, url, title)) return true;
 
         if (price == null || title == null || productId == null) {
             return false;
@@ -327,10 +327,6 @@ public class TelegramBot extends TelegramLongPollingBot {
 
         Product product = new Product(productService.findByAddress(url));
         UserRepr userRepr = userService.findByChatId(chatId);
-
-        if (product == null) {
-            return false;
-        }
 
         SendMessage sendMessage;
 
@@ -455,14 +451,14 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     @Scheduled(cron = "${cron.scedulerEveryMinute}")
     public void followThePrice() {
-       Thread t = new Thread(() -> followThePrice.followThePrice(this));
-       t.setDaemon(true);
-       t.start();
+        Thread t = new Thread(() -> followThePrice.followThePrice(this));
+        t.setDaemon(true);
+        t.start();
     }
 
     public boolean checkOutOfStock(Integer price, long chatId, String url, String title) {
         if (price == null && url != null && title != null) {
-            SendMessage productIsOver = getSendMessageWithParser(chatId, "Товара " +"<a href=\""+ url +"\">"+ title + "</a> нет в наличии");
+            SendMessage productIsOver = getSendMessageWithParser(chatId, "Товара " + "<a href=\"" + url + "\">" + title + "</a> нет в наличии");
             executeMessage(productIsOver);
             // добавить таблицу в бд с отложеными товарами
             return true;
@@ -478,8 +474,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                                                 Integer oldPrice) {
 
 
-
-        log.info("Товар " + "<a href=\""+ url +"\">"+ title + "</a>" + " стал дешевле\n" + "Старая стоимость " + oldPrice + "Новая стоимость" + price);
+        log.info("Товар " + "<a href=\"" + url + "\">" + title + "</a>" + " стал дешевле\n" + "Старая стоимость " + oldPrice + "Новая стоимость" + price);
 
         builder
                 .append("\uD83D\uDD3A")
@@ -491,29 +486,29 @@ public class TelegramBot extends TelegramLongPollingBot {
                 .append(product.getProduct().getPrice())
                 .append("₽");
 
-            Set<User> users = cartService.buyers();
+        Set<User> users = cartService.buyers();
 
-            for (User user : users) {
+        for (User user : users) {
 
-                long chatId = user.getChatId();
+            long chatId = user.getChatId();
 
-                if (cartService.findAllItemsForUser(chatId).contains(product)) {
+            if (cartService.findAllItemsForUser(chatId).contains(product)) {
 
-                    String username = user.getFirstName() == null ? user.getUserName() : user.getFirstName();
+                String username = user.getFirstName() == null ? user.getUserName() : user.getFirstName();
 
-                    SendMessage message = getSendMessageWithParser(user.getChatId(), username + " стоимость " + builder + "изменилась " + price + "₽");
-                    executeMessage(message);
+                SendMessage message = getSendMessageWithParser(user.getChatId(), username + " стоимость " + builder + "изменилась " + price + "₽");
+                executeMessage(message);
 
-                    Product updateProduct = product.getProduct();
-                    updateProduct.setPrice(price);
+                Product updateProduct = product.getProduct();
+                updateProduct.setPrice(price);
 
-                    LineItem lineItem = new LineItem(updateProduct, user);
-                    cartService.update(lineItem);
-                    productService.update(updateProduct);
+                LineItem lineItem = new LineItem(updateProduct, user);
+                cartService.update(lineItem);
+                productService.update(updateProduct);
 
-                    builder.delete(0, builder.length() - 1);
-                }
+                builder.delete(0, builder.length() - 1);
             }
+        }
 
     }
 }

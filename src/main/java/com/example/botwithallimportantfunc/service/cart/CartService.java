@@ -159,4 +159,8 @@ public class CartService implements ICartService {
         }
         return false;
     }
+
+    public boolean isEmptyCart(long chatId) {
+        return findAllItemsForUser(chatId).size() == 0;
+    }
 }
