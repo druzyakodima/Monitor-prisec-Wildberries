@@ -52,6 +52,10 @@ public class TelegramBot extends TelegramLongPollingBot {
     private final String ERROR = "Error occurred: ";
     private String IS_EMPTY_CART = "❌ Пустая корзина";
 
+    {
+        parser = new ParserWebDriver(new ChromeDriver());
+    }
+
     public TelegramBot() {
     }
 
@@ -60,14 +64,12 @@ public class TelegramBot extends TelegramLongPollingBot {
                        ProductService productService,
                        UserService userService,
                        CartService cartService,
-                       ParserWebDriver parser,
                        FollowThePrice followThePrice) {
 
         this.config = config;
         this.productService = productService;
         this.userService = userService;
         this.cartService = cartService;
-        this.parser = parser;
         this.followThePrice = followThePrice;
     }
 
@@ -124,7 +126,8 @@ public class TelegramBot extends TelegramLongPollingBot {
     public boolean checkAddressOrProductId(long chatId, String message, Matcher matcher) {
         if (matcher.find()) {
             if (!saveProductForDB(chatId, message.substring(message.indexOf("h")))) {
-                SendMessage sendMessage = getSendMessageWithParser(chatId, "Ой, а точно такой товар есть на <a href=\"https://www.wildberries.ru/\">WILDBERRIES</a>? \n" + "Или попробуй ещё раз добавить!");
+                SendMessage sendMessage = getSendMessageWithParser(chatId, "Ой, а точно такой товар есть на <a href=\"https://www.wildberries.ru/\">WILDBERRIES</a>? \n" +
+                        "Или попробуй ещё раз добавить!");
                 executeMessage(sendMessage);
             }
             return true;
@@ -158,10 +161,13 @@ public class TelegramBot extends TelegramLongPollingBot {
     }
 
     public void removeAllProductInCartUser(long chatId) {
-        Set<LineItem> lineItems = cartService.findAllItemsForUser(chatId);
 
         if (!cartService.isEmptyCart(chatId)) {
             cartService.removeAllForUser(chatId);
+
+            SendMessage message = getSendMessageWithParser(chatId, "\uD83D\uDCA5 Вы очистили корзину");
+            executeMessage(message);
+
         } else {
             SendMessage sendMessage = getSendMessageWithParser(chatId, IS_EMPTY_CART);
             executeMessage(sendMessage);
@@ -284,7 +290,7 @@ public class TelegramBot extends TelegramLongPollingBot {
             return true;
         }
 
-        parser.getData(new ChromeDriver(), url);
+        parser.getData(url);
 
         Integer price = parser.getPrice();
 
@@ -451,9 +457,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     @Scheduled(cron = "${cron.scedulerEveryMinute}")
     public void followThePrice() {
-        Thread t = new Thread(() -> followThePrice.followThePrice(this));
-        t.setDaemon(true);
-        t.start();
+        followThePrice.followThePrice(this);
     }
 
     public boolean checkOutOfStock(Integer price, long chatId, String url, String title) {

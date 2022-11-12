@@ -15,33 +15,35 @@ import java.time.Duration;
 @Data
 @PropertySource("/application.properties")
 @EnableScheduling
-@Component
-public class ParserWebDriver extends RemoteWebDriver implements IParser {
+public class ParserWebDriver implements IParser {
 
     private String title;
 
     private Integer price;
 
+    private WebDriver webDriver;
+
     private Integer productId;
 
 
-    public ParserWebDriver() {
+    public ParserWebDriver(WebDriver webDriver) {
         System.setProperty("webdriver.chrome.driver", "selenium/chromedriver.exe");
+        this.webDriver = webDriver;
     }
 
     public void setSystemProperty(String key, String value) {
         System.setProperty(key, value);
     }
 
-    public void getData(WebDriver webDriver, String url) {
+    public void getData(String url) {
 
-        webDriver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofMillis(600));
         webDriver.get(url);
 
-        data(webDriver);
+        data();
     }
 
-    private void data(WebDriver webDriver) {
+    private void data() {
 
         try {
             price = Integer
@@ -79,9 +81,15 @@ public class ParserWebDriver extends RemoteWebDriver implements IParser {
                 title = null;
                 productId = null;
             }
-
-        } finally {
-            webDriver.quit();
         }
     }
+
+    public void quit() {
+        webDriver.quit();
+    }
+
+    public void close() {
+        webDriver.close();
+    }
+
 }

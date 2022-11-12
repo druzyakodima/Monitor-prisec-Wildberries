@@ -13,23 +13,23 @@ import java.util.List;
 @Component
 public class FollowThePrice {
 
-    private ParserWebDriver parser;
     private ICartService cartService;
 
     @Autowired
-    public FollowThePrice(ParserWebDriver parser, ICartService cartService) {
-        this.parser = parser;
+    public FollowThePrice(ICartService cartService) {
         this.cartService = cartService;
     }
 
     public void followThePrice(TelegramBot telegramBot) {
+
+        ParserWebDriver parser = new ParserWebDriver(new ChromeDriver());
 
         List<LineItem> products = cartService.findAll();
         StringBuilder builder = new StringBuilder();
 
         for (LineItem product : products) {
 
-            parser.getData(new ChromeDriver(), product.getProduct().getAddress());
+            parser.getData(product.getProduct().getAddress());
 
             Integer price = parser.getPrice();
             Integer oldPrice = product.getProduct().getPrice();
@@ -51,5 +51,7 @@ public class FollowThePrice {
                 }
             }
         }
+        //parser.quit();
+        parser.close();
     }
 }
