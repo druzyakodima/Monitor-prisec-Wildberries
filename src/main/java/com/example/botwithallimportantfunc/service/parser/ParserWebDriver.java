@@ -4,10 +4,8 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.stereotype.Component;
 
 import java.time.Duration;
 
