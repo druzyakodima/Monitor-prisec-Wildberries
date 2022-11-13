@@ -39,7 +39,7 @@ public class CartService implements ICartService {
     @Transactional
     @Override
     public void save(ProductRepr productRepr, UserRepr userRepr) {
-         cartRepository.saveAndFlush(new LineItem(productRepr, userRepr));
+        cartRepository.saveAndFlush(new LineItem(productRepr, userRepr));
     }
 
     @Transactional

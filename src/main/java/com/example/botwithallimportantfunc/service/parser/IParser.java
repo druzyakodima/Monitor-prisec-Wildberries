@@ -4,6 +4,6 @@ import org.openqa.selenium.WebDriver;
 
 public interface IParser {
 
-   void getData(String url);
+    void getData(String url);
 
 }

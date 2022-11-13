@@ -15,7 +15,7 @@ import java.util.Optional;
 @Slf4j
 @Data
 @Service
-public class UserService implements IUserService{
+public class UserService implements IUserService {
 
     private UserRepository userRepository;
 

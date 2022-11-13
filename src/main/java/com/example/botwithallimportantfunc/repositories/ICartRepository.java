@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface ICartRepository extends JpaRepository<LineItem,Long> {
+public interface ICartRepository extends JpaRepository<LineItem, Long> {
 
 }

@@ -55,7 +55,7 @@ public class ProductService implements IProductService {
         if (productRepr.getId() == null) productRepr.setId(product.getId());
     }
 
-    public void  update(Product product) {
+    public void update(Product product) {
         productRepository.saveAndFlush(product);
     }
 
