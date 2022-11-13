@@ -1,10 +1,2 @@
-HELP.md
-!**/src/test/**/target/
 
-### IntelliJ IDEA ###
-.idea
-
-
-### NetBeans ###
-!**/src/test/**/build/
 
