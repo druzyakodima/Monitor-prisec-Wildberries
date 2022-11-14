@@ -31,7 +31,6 @@ public class ParserWebDriver implements IParser {
     }
 
     public ParserWebDriver() {
-        WebDriverManager.chromedriver().setup();
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
@@ -46,6 +45,8 @@ public class ParserWebDriver implements IParser {
             throw new RuntimeException(e);
         }
 
+
+        WebDriverManager.chromedriver().setup();
         webDriver = new ChromeDriver(options);
     }
 
@@ -54,6 +55,7 @@ public class ParserWebDriver implements IParser {
     }
 
     public void getData(String url) {
+        
         webDriver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
         webDriver.get(url);
 
