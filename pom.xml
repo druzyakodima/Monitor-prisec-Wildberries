@@ -15,8 +15,6 @@
     <description>BotWithAllImportantFunc</description>
     <properties>
         <java.version>17</java.version>
-        <maven.compiler.source>3.10.1</maven.compiler.source>
-        <maven.compiler.target>3.10.1</maven.compiler.target>
     </properties>
     <dependencies>
 
