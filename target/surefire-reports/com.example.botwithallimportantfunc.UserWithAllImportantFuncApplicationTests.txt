@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.example.botwithallimportantfunc.UserWithAllImportantFuncApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 13.422 s - in com.example.botwithallimportantfunc.UserWithAllImportantFuncApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.573 s - in com.example.botwithallimportantfunc.UserWithAllImportantFuncApplicationTests
