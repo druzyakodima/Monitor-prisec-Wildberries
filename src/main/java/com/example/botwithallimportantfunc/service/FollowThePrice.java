@@ -4,11 +4,13 @@ import com.example.botwithallimportantfunc.entity.LineItem;
 import com.example.botwithallimportantfunc.model.TelegramBot;
 import com.example.botwithallimportantfunc.service.cart.ICartService;
 import com.example.botwithallimportantfunc.service.parser.ParserWebDriver;
+import org.apache.commons.exec.environment.EnvironmentUtils;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.util.List;
 
 @Component
@@ -21,8 +23,21 @@ public class FollowThePrice {
         this.cartService = cartService;
     }
 
-    public void followThePrice(TelegramBot telegramBot, ChromeOptions options) {
-        
+    public void followThePrice(TelegramBot telegramBot) {
+
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        options.addArguments("window-size=1200x600");
+
+        try {
+            String binaryPath = EnvironmentUtils.getProcEnvironment().get("GOOGLE_CHROME_BIN");
+            options.setBinary(binaryPath);
+            options.addArguments("--disable-gpu");
+            options.addArguments("--no-sandbox");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         ParserWebDriver parser = new ParserWebDriver(new ChromeDriver(options));
 
         List<LineItem> products = cartService.findAll();

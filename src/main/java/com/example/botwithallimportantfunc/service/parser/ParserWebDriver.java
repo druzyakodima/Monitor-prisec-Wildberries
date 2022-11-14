@@ -1,17 +1,15 @@
 package com.example.botwithallimportantfunc.service.parser;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.scheduling.annotation.EnableScheduling;
+
 import java.time.Duration;
 
 @Slf4j
 @Data
-@PropertySource("/application.properties")
-@EnableScheduling
 public class ParserWebDriver implements IParser {
 
     private String title;
@@ -24,7 +22,7 @@ public class ParserWebDriver implements IParser {
 
 
     public ParserWebDriver(WebDriver webDriver) {
-        System.setProperty("webdriver.chrome.driver", "selenium/chromedriver.exe");
+        WebDriverManager.chromedriver().setup();
         this.webDriver = webDriver;
     }
 
@@ -33,7 +31,6 @@ public class ParserWebDriver implements IParser {
     }
 
     public void getData(String url) {
-
         webDriver.manage().timeouts().implicitlyWait(Duration.ofMillis(600));
         webDriver.get(url);
 
