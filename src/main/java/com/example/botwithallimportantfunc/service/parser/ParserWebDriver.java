@@ -54,7 +54,7 @@ public class ParserWebDriver implements IParser {
     }
 
     public void getData(String url) {
-        webDriver.manage().timeouts().implicitlyWait(Duration.ofMillis(100));
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofMillis(1000));
         webDriver.get(url);
 
         data();
