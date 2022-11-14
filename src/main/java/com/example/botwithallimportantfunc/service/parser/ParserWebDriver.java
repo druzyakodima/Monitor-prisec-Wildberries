@@ -3,9 +3,13 @@ package com.example.botwithallimportantfunc.service.parser;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.exec.environment.EnvironmentUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
+import java.io.IOException;
 import java.time.Duration;
 
 @Slf4j
@@ -24,6 +28,25 @@ public class ParserWebDriver implements IParser {
     public ParserWebDriver(WebDriver webDriver) {
         WebDriverManager.chromedriver().setup();
         this.webDriver = webDriver;
+    }
+
+    public ParserWebDriver() {
+        WebDriverManager.chromedriver().setup();
+
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        options.addArguments("window-size=1200x600");
+
+        try {
+            String binaryPath = EnvironmentUtils.getProcEnvironment().get("GOOGLE_CHROME_BIN");
+            options.setBinary(binaryPath);
+            options.addArguments("--disable-gpu");
+            options.addArguments("--no-sandbox");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        webDriver = new ChromeDriver(options);
     }
 
     public void setSystemProperty(String key, String value) {
