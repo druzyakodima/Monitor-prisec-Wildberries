@@ -47,6 +47,7 @@ public class ParserWebDriver implements IParser {
 
 
         WebDriverManager.chromedriver().setup();
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofMillis(600));
         webDriver = new ChromeDriver(options);
     }
 
@@ -56,10 +57,9 @@ public class ParserWebDriver implements IParser {
 
     public void getData(String url) {
 
-        webDriver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofMillis(600));
         webDriver.get(url);
 
-        log.info(webDriver.getPageSource());
         log.info(url);
 
         data();
