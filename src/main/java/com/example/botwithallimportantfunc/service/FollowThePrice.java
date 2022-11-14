@@ -5,6 +5,7 @@ import com.example.botwithallimportantfunc.model.TelegramBot;
 import com.example.botwithallimportantfunc.service.cart.ICartService;
 import com.example.botwithallimportantfunc.service.parser.ParserWebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,9 +21,9 @@ public class FollowThePrice {
         this.cartService = cartService;
     }
 
-    public void followThePrice(TelegramBot telegramBot) {
-
-        ParserWebDriver parser = new ParserWebDriver(new ChromeDriver());
+    public void followThePrice(TelegramBot telegramBot, ChromeOptions options) {
+        
+        ParserWebDriver parser = new ParserWebDriver(new ChromeDriver(options));
 
         List<LineItem> products = cartService.findAll();
         StringBuilder builder = new StringBuilder();

@@ -15,7 +15,9 @@ import com.vdurmont.emoji.EmojiParser;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.exec.environment.EnvironmentUtils;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -30,6 +32,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -48,12 +51,26 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     private FollowThePrice followThePrice;
 
+    private ChromeOptions options;
     private CartService cartService;
     private final String ERROR = "Error occurred: ";
     private String IS_EMPTY_CART = "❌ Пустая корзина";
 
     {
-        parser = new ParserWebDriver(new ChromeDriver());
+        options = new ChromeOptions();
+        options.addArguments("--headless");
+        options.addArguments("window-size=1200x600");
+
+        try {
+            String binaryPath = EnvironmentUtils.getProcEnvironment().get("GOOGLE_CHROME_SHIM");
+            options.setBinary(binaryPath);
+            options.addArguments("--disable-gpu");
+            options.addArguments("--no-sandbox");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        parser = new ParserWebDriver(new ChromeDriver(options));
     }
 
     public TelegramBot() {
@@ -457,7 +474,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     @Scheduled(cron = "${cron.scedulerEveryMinute}")
     public void followThePrice() {
-        followThePrice.followThePrice(this);
+        followThePrice.followThePrice(this, options);
     }
 
     public boolean checkOutOfStock(Integer price, long chatId, String url, String title) {
