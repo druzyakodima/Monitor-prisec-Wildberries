@@ -10,7 +10,7 @@
         <module name="BotWithAllImportantFunc" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="17">
       <module name="BotWithAllImportantFunc" target="17" />
     </bytecodeTargetLevel>
   </component>
