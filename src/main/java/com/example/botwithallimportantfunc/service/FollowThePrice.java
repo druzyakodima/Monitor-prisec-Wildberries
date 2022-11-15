@@ -1,7 +1,7 @@
 package com.example.botwithallimportantfunc.service;
 
 import com.example.botwithallimportantfunc.entity.LineItem;
-import com.example.botwithallimportantfunc.model.TelegramBot;
+import com.example.botwithallimportantfunc.controller.TelegramBot;
 import com.example.botwithallimportantfunc.service.cart.ICartService;
 import com.example.botwithallimportantfunc.service.parser.ParserWebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +22,7 @@ public class FollowThePrice {
         this.cartService = cartService;
     }
 
+    @Autowired
     public void followThePrice(TelegramBot telegramBot) {
 
         List<LineItem> products = cartService.findAll();

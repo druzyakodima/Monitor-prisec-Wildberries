@@ -1,5 +1,6 @@
 package com.example.botwithallimportantfunc.service.product;
 
+import com.example.botwithallimportantfunc.entity.product.Product;
 import com.example.botwithallimportantfunc.entity.product.ProductRepr;
 
 import java.util.List;
@@ -16,6 +17,8 @@ public interface IProductService {
     void delete(ProductRepr productRepr);
 
     boolean contains(ProductRepr productRepr);
+
+    public void update(Product product);
 
     Optional<ProductRepr> findById(long productId);
 

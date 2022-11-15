@@ -1,4 +1,4 @@
-package com.example.botwithallimportantfunc.model;
+package com.example.botwithallimportantfunc.controller;
 
 import com.example.botwithallimportantfunc.config.BotConfig;
 import com.example.botwithallimportantfunc.entity.LineItem;
@@ -8,8 +8,11 @@ import com.example.botwithallimportantfunc.entity.user.User;
 import com.example.botwithallimportantfunc.entity.user.UserRepr;
 import com.example.botwithallimportantfunc.service.FollowThePrice;
 import com.example.botwithallimportantfunc.service.cart.CartService;
+import com.example.botwithallimportantfunc.service.cart.ICartService;
 import com.example.botwithallimportantfunc.service.parser.ParserWebDriver;
+import com.example.botwithallimportantfunc.service.product.IProductService;
 import com.example.botwithallimportantfunc.service.product.ProductService;
+import com.example.botwithallimportantfunc.service.user.IUserService;
 import com.example.botwithallimportantfunc.service.user.UserService;
 import com.vdurmont.emoji.EmojiParser;
 import lombok.Getter;
@@ -43,10 +46,10 @@ import java.util.regex.Pattern;
 public class TelegramBot extends TelegramLongPollingBot {
 
     private BotConfig config;
-    private ProductService productService;
-    private UserService userService;
+    private IProductService productService;
+    private IUserService userService;
     private FollowThePrice followThePrice;
-    private CartService cartService;
+    private ICartService cartService;
     private final String ERROR = "Error occurred: ";
     private String IS_EMPTY_CART = "❌ Пустая корзина";
 
@@ -428,22 +431,6 @@ public class TelegramBot extends TelegramLongPollingBot {
         return keyboardMarkup;
     }
 
-    public static SendMessage getSendMessageWithParser(long chatId, String text) {
-        String secondAnswer = EmojiParser.parseToUnicode(text);
-        SendMessage secondSendMessage = getSendMessage(chatId, secondAnswer);
-        secondSendMessage.setParseMode("HTML");
-        secondSendMessage.disableWebPagePreview();
-        return secondSendMessage;
-    }
-
-    public static SendMessage getSendMessage(long chatId, String text) {
-        SendMessage sendMessage = new SendMessage();
-        sendMessage.setText(text);
-        sendMessage.setChatId(chatId);
-        return sendMessage;
-
-    }
-
     public void executeMessage(SendMessage message) {
 
         try {
@@ -512,6 +499,22 @@ public class TelegramBot extends TelegramLongPollingBot {
                 builder.delete(0, builder.length() - 1);
             }
         }
+
+    }
+
+    public static SendMessage getSendMessageWithParser(long chatId, String text) {
+        String secondAnswer = EmojiParser.parseToUnicode(text);
+        SendMessage secondSendMessage = getSendMessage(chatId, secondAnswer);
+        secondSendMessage.setParseMode("HTML");
+        secondSendMessage.disableWebPagePreview();
+        return secondSendMessage;
+    }
+
+    public static SendMessage getSendMessage(long chatId, String text) {
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setText(text);
+        sendMessage.setChatId(chatId);
+        return sendMessage;
 
     }
 }

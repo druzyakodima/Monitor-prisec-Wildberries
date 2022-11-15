@@ -4,7 +4,6 @@ package com.example.botwithallimportantfunc.service.product;
 import com.example.botwithallimportantfunc.entity.product.Product;
 import com.example.botwithallimportantfunc.entity.product.ProductRepr;
 import com.example.botwithallimportantfunc.repositories.ProductRepository;
-import com.example.botwithallimportantfunc.service.product.IProductService;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,6 +54,7 @@ public class ProductService implements IProductService {
         if (productRepr.getId() == null) productRepr.setId(product.getId());
     }
 
+    @Override
     public void update(Product product) {
         productRepository.saveAndFlush(product);
     }

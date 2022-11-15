@@ -2,6 +2,7 @@ package com.example.botwithallimportantfunc.service.cart;
 
 import com.example.botwithallimportantfunc.entity.LineItem;
 import com.example.botwithallimportantfunc.entity.product.ProductRepr;
+import com.example.botwithallimportantfunc.entity.user.User;
 import com.example.botwithallimportantfunc.entity.user.UserRepr;
 
 import java.util.List;
@@ -25,4 +26,8 @@ public interface ICartService {
     ProductRepr findById(long userId, Integer productId);
 
     public List<LineItem> findAll();
+
+    public boolean isEmptyCart(long chatId);
+
+    public Set<User> buyers();
 }
