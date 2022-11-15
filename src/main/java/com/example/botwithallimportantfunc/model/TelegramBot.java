@@ -44,17 +44,11 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     private BotConfig config;
     private ProductService productService;
-
-    private ParserWebDriver parser;
     private UserService userService;
     private FollowThePrice followThePrice;
     private CartService cartService;
     private final String ERROR = "Error occurred: ";
     private String IS_EMPTY_CART = "❌ Пустая корзина";
-
-    {
-        parser = new ParserWebDriver();
-    }
 
     public TelegramBot() {
     }
@@ -64,7 +58,8 @@ public class TelegramBot extends TelegramLongPollingBot {
                        ProductService productService,
                        UserService userService,
                        CartService cartService,
-                       FollowThePrice followThePrice) {
+                       FollowThePrice followThePrice,
+                       ParserWebDriver parser) {
 
         this.config = config;
         this.productService = productService;
@@ -290,6 +285,8 @@ public class TelegramBot extends TelegramLongPollingBot {
             return true;
         }
 
+        ParserWebDriver parser = new ParserWebDriver();
+
         parser.getData(url);
 
         Integer price = parser.getPrice();
@@ -297,6 +294,8 @@ public class TelegramBot extends TelegramLongPollingBot {
         String title = parser.getTitle();
 
         Integer productId = parser.getProductId();
+
+        parser.quit();
 
 
         if (checkOutOfStock(price, chatId, url, title)) return true;
@@ -321,7 +320,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         }
 
         executeMessage(sendMessage);
-        log.info("Пользователь " + userRepr.getUserName() + " добавил" + productRepr.getTitle());
+        log.info("Пользователь " + userRepr.getUserName() + " добавил " + productRepr.getTitle());
         return true;
     }
 
@@ -500,7 +499,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
                 String username = user.getFirstName() == null ? user.getUserName() : user.getFirstName();
 
-                SendMessage message = getSendMessageWithParser(user.getChatId(), username + " стоимость " + builder + "изменилась " + price + "₽");
+                SendMessage message = getSendMessageWithParser(user.getChatId(), username + " стоимость " + builder + " изменилась " + price + "₽");
                 executeMessage(message);
 
                 Product updateProduct = product.getProduct();

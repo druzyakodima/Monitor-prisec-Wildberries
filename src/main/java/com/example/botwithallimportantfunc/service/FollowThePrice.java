@@ -14,15 +14,15 @@ public class FollowThePrice {
 
     private ICartService cartService;
 
+    private ParserWebDriver parser;
+
     @Autowired
-    public FollowThePrice(ICartService cartService) {
+    public FollowThePrice(ICartService cartService, ParserWebDriver parser) {
+        this.parser = parser;
         this.cartService = cartService;
     }
 
     public void followThePrice(TelegramBot telegramBot) {
-
-
-        ParserWebDriver parser = new ParserWebDriver();
 
         List<LineItem> products = cartService.findAll();
         StringBuilder builder = new StringBuilder();
@@ -34,24 +34,22 @@ public class FollowThePrice {
             Integer price = parser.getPrice();
             Integer oldPrice = product.getProduct().getPrice();
 
-            if (!price.equals(oldPrice)) {
+            long chatId = product.getUser().getChatId();
+            String url = product.getProduct().getAddress();
+            String title = parser.getTitle();
 
-                long chatId = product.getUser().getChatId();
-                String url = product.getProduct().getAddress();
-                String title = parser.getTitle();
-
-                if (telegramBot.checkOutOfStock(price, chatId, url, title)) {
-                    cartService.remove(chatId, url);
-                    continue;
-                }
-
-                if (oldPrice > price) {
-
-                    telegramBot.changePriceAndNotificationUsers(builder, product, price, url, title, oldPrice);
-                }
+            if (telegramBot.checkOutOfStock(price, chatId, url, title)) {
+                cartService.remove(chatId, url);
+                continue;
             }
+
+
+            if (oldPrice > price) {
+                telegramBot.changePriceAndNotificationUsers(builder, product, price, url, title, oldPrice);
+            }
+
         }
         //parser.quit();
-        parser.close();
+        //parser.close();
     }
 }

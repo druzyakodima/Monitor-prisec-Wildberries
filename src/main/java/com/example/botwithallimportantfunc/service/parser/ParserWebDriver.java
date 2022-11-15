@@ -3,17 +3,16 @@ package com.example.botwithallimportantfunc.service.parser;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.exec.environment.EnvironmentUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.time.Duration;
 
 @Slf4j
 @Data
+@Component
 public class ParserWebDriver implements IParser {
 
     private String title;
@@ -24,15 +23,9 @@ public class ParserWebDriver implements IParser {
 
     private Integer productId;
 
-
-    public ParserWebDriver(WebDriver webDriver) {
-        WebDriverManager.chromedriver().setup();
-        this.webDriver = webDriver;
-    }
-
     public ParserWebDriver() {
 
-        ChromeOptions options = new ChromeOptions();
+        /*ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
         options.addArguments("window-size=1200x600");
 
@@ -43,12 +36,12 @@ public class ParserWebDriver implements IParser {
             options.addArguments("--no-sandbox");
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }
+        }*/
 
 
         WebDriverManager.chromedriver().setup();
-        webDriver.manage().timeouts().implicitlyWait(Duration.ofMillis(600));
-        webDriver = new ChromeDriver(options);
+        //System.setProperty("webdriver.chrome.driver","selenium/chromedriver.exe");
+        webDriver = new ChromeDriver(/*options*/);
     }
 
     public void setSystemProperty(String key, String value) {
