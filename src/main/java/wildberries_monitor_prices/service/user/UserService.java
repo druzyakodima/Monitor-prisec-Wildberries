@@ -1,8 +1,8 @@
-package org.wildberries.monitor.prices.service.user;
+package wildberries_monitor_prices.service.user;
 
-import org.wildberries.monitor.prices.entity.user.User;
-import org.wildberries.monitor.prices.entity.user.UserRepr;
-import org.wildberries.monitor.prices.repositories.UserRepository;
+import wildberries_monitor_prices.entity.user.User;
+import wildberries_monitor_prices.entity.user.UserRepr;
+import wildberries_monitor_prices.repositories.UserRepository;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

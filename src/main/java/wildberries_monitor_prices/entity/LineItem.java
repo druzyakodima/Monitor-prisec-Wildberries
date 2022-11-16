@@ -1,9 +1,9 @@
-package org.wildberries.monitor.prices.entity;
+package wildberries_monitor_prices.entity;
 
-import org.wildberries.monitor.prices.entity.product.Product;
-import org.wildberries.monitor.prices.entity.product.ProductRepr;
-import org.wildberries.monitor.prices.entity.user.User;
-import org.wildberries.monitor.prices.entity.user.UserRepr;
+import wildberries_monitor_prices.entity.product.Product;
+import wildberries_monitor_prices.entity.product.ProductRepr;
+import wildberries_monitor_prices.entity.user.User;
+import wildberries_monitor_prices.entity.user.UserRepr;
 import lombok.Data;
 
 import javax.persistence.*;

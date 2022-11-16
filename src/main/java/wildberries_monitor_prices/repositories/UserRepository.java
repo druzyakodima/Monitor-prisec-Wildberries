@@ -1,6 +1,6 @@
-package com.example.botwithallimportantfunc.repositories;
+package wildberries_monitor_prices.repositories;
 
-import com.example.botwithallimportantfunc.entity.user.User;
+import wildberries_monitor_prices.entity.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

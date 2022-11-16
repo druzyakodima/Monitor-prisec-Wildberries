@@ -1,4 +1,4 @@
-package org.wildberries.monitor.prices.config;
+package wildberries_monitor_prices.config;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;

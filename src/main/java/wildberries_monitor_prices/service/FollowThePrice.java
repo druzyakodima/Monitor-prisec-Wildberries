@@ -1,9 +1,9 @@
-package org.wildberries.monitor.prices.service;
+package wildberries_monitor_prices.service;
 
-import org.wildberries.monitor.prices.entity.LineItem;
-import org.wildberries.monitor.prices.controller.TelegramBot;
-import org.wildberries.monitor.prices.service.cart.ICartService;
-import org.wildberries.monitor.prices.service.parser.ParserWebDriver;
+import wildberries_monitor_prices.entity.LineItem;
+import wildberries_monitor_prices.controller.TelegramBot;
+import wildberries_monitor_prices.service.cart.ICartService;
+import wildberries_monitor_prices.service.parser.ParserWebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

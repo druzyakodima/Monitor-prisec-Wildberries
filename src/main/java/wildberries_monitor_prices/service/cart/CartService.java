@@ -1,12 +1,12 @@
-package org.wildberries.monitor.prices.service.cart;
+package wildberries_monitor_prices.service.cart;
 
-import org.wildberries.monitor.prices.entity.LineItem;
-import org.wildberries.monitor.prices.entity.product.ProductRepr;
-import org.wildberries.monitor.prices.entity.user.User;
-import org.wildberries.monitor.prices.entity.user.UserRepr;
-import org.wildberries.monitor.prices.repositories.ICartRepository;
-import org.wildberries.monitor.prices.service.product.IProductService;
-import org.wildberries.monitor.prices.service.user.IUserService;
+import wildberries_monitor_prices.entity.LineItem;
+import wildberries_monitor_prices.entity.product.ProductRepr;
+import wildberries_monitor_prices.entity.user.User;
+import wildberries_monitor_prices.entity.user.UserRepr;
+import wildberries_monitor_prices.repositories.ICartRepository;
+import wildberries_monitor_prices.service.product.IProductService;
+import wildberries_monitor_prices.service.user.IUserService;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

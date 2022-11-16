@@ -1,6 +1,6 @@
-package org.wildberries.monitor.prices.config;
+package wildberries_monitor_prices.config;
 
-import org.wildberries.monitor.prices.controller.TelegramBot;
+import wildberries_monitor_prices.controller.TelegramBot;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

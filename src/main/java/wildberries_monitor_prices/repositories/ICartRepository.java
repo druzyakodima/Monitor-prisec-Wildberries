@@ -1,6 +1,6 @@
-package org.wildberries.monitor.prices.repositories;
+package wildberries_monitor_prices.repositories;
 
-import org.wildberries.monitor.prices.entity.LineItem;
+import wildberries_monitor_prices.entity.LineItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

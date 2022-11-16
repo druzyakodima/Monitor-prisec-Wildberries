@@ -1,9 +1,9 @@
-package org.wildberries.monitor.prices.service.product;
+package wildberries_monitor_prices.service.product;
 
 
-import org.wildberries.monitor.prices.entity.product.Product;
-import org.wildberries.monitor.prices.entity.product.ProductRepr;
-import org.wildberries.monitor.prices.repositories.ProductRepository;
+import wildberries_monitor_prices.entity.product.Product;
+import wildberries_monitor_prices.entity.product.ProductRepr;
+import wildberries_monitor_prices.repositories.ProductRepository;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

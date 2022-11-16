@@ -1,6 +1,6 @@
-package org.wildberries.monitor.prices.service.user;
+package wildberries_monitor_prices.service.user;
 
-import org.wildberries.monitor.prices.entity.user.UserRepr;
+import wildberries_monitor_prices.entity.user.UserRepr;
 
 import java.util.Optional;
 

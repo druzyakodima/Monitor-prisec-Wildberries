@@ -1,4 +1,4 @@
-package org.wildberries.monitor.prices.service.parser;
+package wildberries_monitor_prices.service.parser;
 
 public interface IParser {
 

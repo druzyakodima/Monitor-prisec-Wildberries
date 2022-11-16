@@ -1,4 +1,4 @@
-package org.wildberries.monitor.prices.entity.user;
+package wildberries_monitor_prices.entity.user;
 
 import lombok.Data;
 import org.springframework.lang.Nullable;

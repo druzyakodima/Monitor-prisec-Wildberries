@@ -1,9 +1,9 @@
-package org.wildberries.monitor.prices.service.cart;
+package wildberries_monitor_prices.service.cart;
 
-import org.wildberries.monitor.prices.entity.LineItem;
-import org.wildberries.monitor.prices.entity.product.ProductRepr;
-import org.wildberries.monitor.prices.entity.user.User;
-import org.wildberries.monitor.prices.entity.user.UserRepr;
+import wildberries_monitor_prices.entity.LineItem;
+import wildberries_monitor_prices.entity.product.ProductRepr;
+import wildberries_monitor_prices.entity.user.User;
+import wildberries_monitor_prices.entity.user.UserRepr;
 
 import java.util.List;
 import java.util.Set;
