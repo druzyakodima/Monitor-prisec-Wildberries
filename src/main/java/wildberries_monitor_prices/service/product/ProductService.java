@@ -1,6 +1,5 @@
 package wildberries_monitor_prices.service.product;
 
-
 import wildberries_monitor_prices.entity.product.Product;
 import wildberries_monitor_prices.entity.product.ProductRepr;
 import wildberries_monitor_prices.repositories.ProductRepository;

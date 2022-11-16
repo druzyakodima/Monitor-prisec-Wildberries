@@ -1,4 +1,4 @@
-package org.wildberries.monitor.prices.repositories;
+package wildberries_monitor_prices.repositories;
 
 import org.wildberries.monitor.prices.entity.product.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
