@@ -8,7 +8,7 @@
         <version>2.7.5</version>
         <relativePath/>
     </parent>
-    <groupId>com.example</groupId>
+    <groupId>org.wildberries.monitor.prices</groupId>
     <artifactId>BotWithAllImportantFunc</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>BotWithAllImportantFunc</name>
