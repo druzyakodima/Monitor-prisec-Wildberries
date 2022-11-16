@@ -1,7 +1,6 @@
-package com.example.botwithallimportantfunc.entity.user;
+package org.wildberries.monitor.prices.entity.user;
 
-import com.example.botwithallimportantfunc.entity.LineItem;
-import com.example.botwithallimportantfunc.entity.product.Product;
+import org.wildberries.monitor.prices.entity.LineItem;
 import lombok.Data;
 
 import javax.persistence.*;

@@ -1,4 +1,4 @@
-package com.example.botwithallimportantfunc;
+package org.wildberries.monitor.prices;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package com.example.botwithallimportantfunc.service.parser;
+package org.wildberries.monitor.prices.service.parser;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.Data;

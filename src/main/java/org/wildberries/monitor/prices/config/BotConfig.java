@@ -1,4 +1,4 @@
-package com.example.botwithallimportantfunc.config;
+package org.wildberries.monitor.prices.config;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;

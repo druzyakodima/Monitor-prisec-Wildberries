@@ -1,9 +1,9 @@
-package com.example.botwithallimportantfunc.service.product;
+package org.wildberries.monitor.prices.service.product;
 
 
-import com.example.botwithallimportantfunc.entity.product.Product;
-import com.example.botwithallimportantfunc.entity.product.ProductRepr;
-import com.example.botwithallimportantfunc.repositories.ProductRepository;
+import org.wildberries.monitor.prices.entity.product.Product;
+import org.wildberries.monitor.prices.entity.product.ProductRepr;
+import org.wildberries.monitor.prices.repositories.ProductRepository;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
-package com.example.botwithallimportantfunc.config;
+package org.wildberries.monitor.prices.config;
 
-import com.example.botwithallimportantfunc.controller.TelegramBot;
+import org.wildberries.monitor.prices.controller.TelegramBot;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

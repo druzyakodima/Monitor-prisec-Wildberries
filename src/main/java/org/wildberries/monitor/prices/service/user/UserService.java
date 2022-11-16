@@ -1,8 +1,8 @@
-package com.example.botwithallimportantfunc.service.user;
+package org.wildberries.monitor.prices.service.user;
 
-import com.example.botwithallimportantfunc.entity.user.User;
-import com.example.botwithallimportantfunc.entity.user.UserRepr;
-import com.example.botwithallimportantfunc.repositories.UserRepository;
+import org.wildberries.monitor.prices.entity.user.User;
+import org.wildberries.monitor.prices.entity.user.UserRepr;
+import org.wildberries.monitor.prices.repositories.UserRepository;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

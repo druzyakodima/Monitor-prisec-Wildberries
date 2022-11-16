@@ -1,7 +1,5 @@
-package com.example.botwithallimportantfunc.entity.product;
+package org.wildberries.monitor.prices.entity.product;
 
-import com.example.botwithallimportantfunc.entity.LineItem;
-import com.example.botwithallimportantfunc.entity.product.Product;
 import lombok.Data;
 import org.springframework.lang.Nullable;
 

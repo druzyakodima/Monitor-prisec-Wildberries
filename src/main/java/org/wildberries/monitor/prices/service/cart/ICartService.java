@@ -1,9 +1,9 @@
-package com.example.botwithallimportantfunc.service.cart;
+package org.wildberries.monitor.prices.service.cart;
 
-import com.example.botwithallimportantfunc.entity.LineItem;
-import com.example.botwithallimportantfunc.entity.product.ProductRepr;
-import com.example.botwithallimportantfunc.entity.user.User;
-import com.example.botwithallimportantfunc.entity.user.UserRepr;
+import org.wildberries.monitor.prices.entity.LineItem;
+import org.wildberries.monitor.prices.entity.product.ProductRepr;
+import org.wildberries.monitor.prices.entity.user.User;
+import org.wildberries.monitor.prices.entity.user.UserRepr;
 
 import java.util.List;
 import java.util.Set;

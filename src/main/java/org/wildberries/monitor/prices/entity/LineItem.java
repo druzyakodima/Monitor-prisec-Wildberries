@@ -1,9 +1,9 @@
-package com.example.botwithallimportantfunc.entity;
+package org.wildberries.monitor.prices.entity;
 
-import com.example.botwithallimportantfunc.entity.product.Product;
-import com.example.botwithallimportantfunc.entity.product.ProductRepr;
-import com.example.botwithallimportantfunc.entity.user.User;
-import com.example.botwithallimportantfunc.entity.user.UserRepr;
+import org.wildberries.monitor.prices.entity.product.Product;
+import org.wildberries.monitor.prices.entity.product.ProductRepr;
+import org.wildberries.monitor.prices.entity.user.User;
+import org.wildberries.monitor.prices.entity.user.UserRepr;
 import lombok.Data;
 
 import javax.persistence.*;

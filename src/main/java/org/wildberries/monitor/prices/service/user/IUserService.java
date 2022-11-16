@@ -1,6 +1,6 @@
-package com.example.botwithallimportantfunc.service.user;
+package org.wildberries.monitor.prices.service.user;
 
-import com.example.botwithallimportantfunc.entity.user.UserRepr;
+import org.wildberries.monitor.prices.entity.user.UserRepr;
 
 import java.util.Optional;
 

@@ -1,12 +1,12 @@
-package com.example.botwithallimportantfunc.service.cart;
+package org.wildberries.monitor.prices.service.cart;
 
-import com.example.botwithallimportantfunc.entity.LineItem;
-import com.example.botwithallimportantfunc.entity.product.ProductRepr;
-import com.example.botwithallimportantfunc.entity.user.User;
-import com.example.botwithallimportantfunc.entity.user.UserRepr;
-import com.example.botwithallimportantfunc.repositories.ICartRepository;
-import com.example.botwithallimportantfunc.service.product.IProductService;
-import com.example.botwithallimportantfunc.service.user.IUserService;
+import org.wildberries.monitor.prices.entity.LineItem;
+import org.wildberries.monitor.prices.entity.product.ProductRepr;
+import org.wildberries.monitor.prices.entity.user.User;
+import org.wildberries.monitor.prices.entity.user.UserRepr;
+import org.wildberries.monitor.prices.repositories.ICartRepository;
+import org.wildberries.monitor.prices.service.product.IProductService;
+import org.wildberries.monitor.prices.service.user.IUserService;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
