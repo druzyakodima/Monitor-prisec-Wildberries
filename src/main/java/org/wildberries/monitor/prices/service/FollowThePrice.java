@@ -1,9 +1,9 @@
-package com.example.botwithallimportantfunc.service;
+package org.wildberries.monitor.prices.service;
 
-import com.example.botwithallimportantfunc.entity.LineItem;
-import com.example.botwithallimportantfunc.controller.TelegramBot;
-import com.example.botwithallimportantfunc.service.cart.ICartService;
-import com.example.botwithallimportantfunc.service.parser.ParserWebDriver;
+import org.wildberries.monitor.prices.entity.LineItem;
+import org.wildberries.monitor.prices.controller.TelegramBot;
+import org.wildberries.monitor.prices.service.cart.ICartService;
+import org.wildberries.monitor.prices.service.parser.ParserWebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +22,6 @@ public class FollowThePrice {
         this.cartService = cartService;
     }
 
-    @Autowired
     public void followThePrice(TelegramBot telegramBot) {
 
         List<LineItem> products = cartService.findAll();
