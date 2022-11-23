@@ -1,9 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.example.botwithallimportantfunc.UserWithAllImportantFuncApplicationTests
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 1.425 s <<< FAILURE! - in com.example.botwithallimportantfunc.UserWithAllImportantFuncApplicationTests
-contextLoads  Time elapsed: 0.001 s  <<< ERROR!
-java.lang.IllegalStateException: Failed to load ApplicationContext
-Caused by: org.springframework.beans.factory.BeanDefinitionStoreException: Failed to parse configuration class [com.example.botwithallimportantfunc.BotWithAllImportantFuncApplication]; nested exception is java.io.FileNotFoundException: Could not open ServletContext resource [/application.properties]
-Caused by: java.io.FileNotFoundException: Could not open ServletContext resource [/application.properties]
-
